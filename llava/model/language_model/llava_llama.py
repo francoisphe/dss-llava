@@ -40,7 +40,7 @@ class LlavaLlamaModel(LlavaMetaModel, LlamaModel):
 class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
     config_class = LlavaConfig
 
-    def __init__(self, config, cache_dir=None):
+    def __init__(self, config=None, cache_dir=None):
         super(LlamaForCausalLM, self).__init__(config)
         self.model = LlavaLlamaModel(config, cache_dir=cache_dir)
         self.pretraining_tp = config.pretraining_tp

@@ -5,7 +5,7 @@ from transformers import CLIPVisionModel, CLIPImageProcessor, CLIPVisionConfig
 
 
 class CLIPVisionTower(nn.Module):
-    def __init__(self, vision_tower, args, delay_load=False):
+    def __init__(self, vision_tower, args, delay_load=False, cache_dir=None):
         super().__init__()
 
         self.is_loaded = False
@@ -19,7 +19,7 @@ class CLIPVisionTower(nn.Module):
         else:
             self.cfg_only = CLIPVisionConfig.from_pretrained(self.vision_tower_name, cache_dir=None)
 
-    def load_model(self):
+    def load_model(self, cache_dir=None):
         self.image_processor = CLIPImageProcessor.from_pretrained(self.vision_tower_name, cache_dir=None)
         self.vision_tower = CLIPVisionModel.from_pretrained(self.vision_tower_name, cache_dir=None)
         self.vision_tower.requires_grad_(False)

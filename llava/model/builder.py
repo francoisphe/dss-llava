@@ -103,7 +103,7 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
                 model = LlavaMPTForCausalLM.from_pretrained(model_path, low_cpu_mem_usage=True, cache_dir=cache_dir, **kwargs)
             else:
                 tokenizer = AutoTokenizer.from_pretrained(model_path, use_fast=False, cache_dir=cache_dir)
-                model = LlavaLlamaForCausalLM.from_pretrained(model_path, low_cpu_mem_usage=True, cache_dir=cache_dir, **kwargs)
+                model = LlavaLlamaForCausalLM(cache_dir=cache_dir).from_pretrained(model_path, low_cpu_mem_usage=True, cache_dir=cache_dir, **kwargs)
     else:
         # Load language model
         if model_base is not None:
